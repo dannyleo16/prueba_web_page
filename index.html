@@ -3,234 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bingo</title>
+    <title>Día de las Flores Amarillas</title>
     <style>
-       body {
-    font-family: 'Arial', sans-serif;
-    text-align: center;
-    background-color: #F7F5E6;
-    margin: 0;
-    padding: 0;
-    user-select: none;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-h1 {
-    background-color: #E54028;
-    color: white;
-    padding: 20px;
-    margin: 0;
-    font-family: 'Comic Sans MS', cursive;
-    font-size: 2em;
-}
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffef99, #ffe666);
+            overflow: hidden;
+        }
 
-#bingo-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
+        .container {
+            text-align: center;
+            color: white;
+        }
 
-#bingo {
-    background-color: #FFC72C;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 600px;
-}
+        h1 {
+            font-size: 4rem;
+            color: #FFD700;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            animation: zoomIn 2s ease-out forwards;
+        }
 
-.bingo-board {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-    gap: 5px;
-    margin: 20px 0;
-}
+        p {
+            font-size: 1.8rem;
+            margin-top: 20px;
+            color: #fff;
+            opacity: 0;
+            animation: fadeIn 3s ease-out forwards;
+            animation-delay: 2s;
+        }
 
-.bingo-number {
-    width: 40px;
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
-    border: 1px solid #E54028;
-    background-color: #3498DB;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 20px;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-}
+        .button {
+            margin-top: 30px;
+            padding: 15px 30px;
+            background-color: #FFD700;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 3s ease-out forwards;
+            animation-delay: 3s;
+        }
 
-.bingo-number.clicked {
-    background-color: #2ECC71;
-    color: white;
-}
+        .button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
 
-button {
-    background-color: #E54028;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 20px;
-    border-radius: 5px;
-    font-family: 'Comic Sans MS', cursive;
-    margin: 10px 0;
-    width: 100%;
-    max-width: 200px;
-}
+        .button:active {
+            transform: translateY(2px);
+        }
 
-#current-number {
-    font-size: 24px;
-    margin: 20px 0;
-    font-weight: bold;
-    display: none;
-}
+        /* Flor giratoria */
+        .flower {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 70px;
+            background: url('https://i.imgur.com/ygBFfhX.png') no-repeat center center;
+            background-size: contain;
+            animation: drop 5s ease-out infinite, rotateFlower 10s linear infinite;
+            opacity: 0;
+            animation-delay: 0.5s;
+        }
 
-#current-number span {
-    width: 40px;
-    height: 40px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 23px;
-    font-weight: bold;
-    color: white;
-    background-color: #2ECC71;
-    border: 1px solid #E54028;
-    border-radius: 50%;
-    margin-right: 5px;
-}
+        /* Varias flores cayendo */
+        .flower:nth-child(2) { animation-delay: 1s; left: 20%; }
+        .flower:nth-child(3) { animation-delay: 1.5s; left: 80%; }
+        .flower:nth-child(4) { animation-delay: 2s; left: 30%; }
+        .flower:nth-child(5) { animation-delay: 2.5s; left: 70%; }
+        .flower:nth-child(6) { animation-delay: 3s; left: 40%; }
 
-#start-button {
-    background-color: #2ECC71;
-    color: white;
-    width: 100%;
-    max-width: 250px;
-}
+        /* Animaciones */
+        @keyframes zoomIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
 
-@media (max-width: 600px) {
-    h1 {
-        font-size: 1.5em;
-    }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
 
-    .bingo-number {
-        width: 30px;
-        height: 30px;
-        font-size: 16px;
-        line-height: 30px;
-    }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    button {
-        font-size: 16px;
-        padding: 8px 16px;
-    }
+        @keyframes drop {
+            0% { top: -100px; opacity: 0; }
+            20% { opacity: 1; }
+            100% { top: 110vh; opacity: 0; }
+        }
 
-    #current-number {
-        font-size: 20px;
-    }
+        @keyframes rotateFlower {
+            100% { transform: rotate(360deg); }
+        }
 
-    #current-number span {
-        width: 30px;
-        height: 30px;
-        font-size: 20px;
-    }
-}
+        /* Efecto de partículas de pétalos */
+        .petals {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: rgba(255, 218, 68, 0.8);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .petal:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .petal:nth-child(2) { left: 20%; animation-delay: 1s; }
+        .petal:nth-child(3) { left: 30%; animation-delay: 2s; }
+        .petal:nth-child(4) { left: 40%; animation-delay: 3s; }
+        .petal:nth-child(5) { left: 50%; animation-delay: 4s; }
+        .petal:nth-child(6) { left: 60%; animation-delay: 5s; }
+        .petal:nth-child(7) { left: 70%; animation-delay: 6s; }
+        .petal:nth-child(8) { left: 80%; animation-delay: 7s; }
+
+        @keyframes float {
+            0% { top: -20px; opacity: 0; }
+            10% { opacity: 1; }
+            100% { top: 100vh; opacity: 0; }
+        }
     </style>
 </head>
 <body>
-    <h1>BINGO SOLIDARIO vercel</h1>
-    <div id="bingo-container">
-        <div id="bingo">
-            <button id="start-button" onclick="startGame()">Comenzar Partida</button>
-            <button id="reset-button" style="display:none;" onclick="resetGame()">Reiniciar Juego</button>
-            <div id="bingo-board" class="bingo-board"></div>
-            <p id="current-number"><span></span></p>
-            <button id="draw-button" style="display: none;" onclick="drawNumber()">Sacar Número</button>
-        </div>
+    <div class="container">
+        <h1>¡Feliz Día de las Flores Amarillas!</h1>
+        <p>Que tu día esté lleno de luz, amor y flores.</p>
+        <button class="button" onclick="alert('¡Disfruta de este día tan especial!')">Celebrar</button>
     </div>
-    <audio id="bingo-sound" style="display: none"></audio>
-    <pre>by rayo</pre>
 
-    <script>
-        let numbers = [];
-        let drawnNumbers = [];
-        let isGameStarted = false;
+    <!-- Flores animadas cayendo -->
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
 
-        for (let i = 1; i <= 75; i++) {
-            numbers.push(i);
-        }
-
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
-
-        function startGame() {
-            if (!isGameStarted) {
-                shuffleArray(numbers);
-                isGameStarted = true;
-                resetBoard();
-
-                numbers.sort((a, b) => a - b);
-
-                const bingoBoard = document.getElementById("bingo-board");
-                for (let i = 1; i <= 75; i++) {
-                    const numberCell = document.createElement("div");
-                    numberCell.classList.add("bingo-number");
-                    numberCell.textContent = numbers[i - 1];
-                    numberCell.dataset.number = numbers[i - 1];
-                    bingoBoard.appendChild(numberCell);
-                }
-
-                document.getElementById("start-button").style.display = "none";
-                document.getElementById("reset-button").style.display = "inline-block";
-                document.getElementById("draw-button").style.display = "inline-block";
-            }
-        }
-
-        function resetGame() {
-            location.reload();
-        }
-
-        function resetBoard() {
-            const numberCells = document.querySelectorAll(".bingo-number");
-            numberCells.forEach(cell => {
-                cell.classList.remove("clicked");
-            });
-        }
-
-        function drawNumber() {
-            if (isGameStarted && numbers.length > 0) {
-                const currentNumberElement = document.getElementById("current-number");
-                currentNumberElement.style.display = "block";
-                const randomIndex = Math.floor(Math.random() * numbers.length);
-                const randomNumber = numbers.splice(randomIndex, 1)[0];
-                drawnNumbers.push(randomNumber);
-
-                currentNumberElement.innerHTML = `<p>Bola Actual: <span>${randomNumber}</span> </p>`;
-
-                playBingoSound(randomNumber);
-                markDrawnNumber(randomNumber);
-            } else if (isGameStarted && numbers.length === 0) {
-                alert("Todos los números han sido sacados. ¡Bingo!");
-            }
-        }
-
-        function markDrawnNumber(number) {
-            const numberCell = document.querySelector(`.bingo-number[data-number="${number}"]`);
-            if (numberCell) {
-                numberCell.classList.add("clicked");
-            }
-        }
-
-        function playBingoSound(number) {
-            const audioElement = document.getElementById("bingo-sound");
-            audioElement.src = `lista_numeros/${number}.mp3`;
-            audioElement.play();
-        }
-    </script>
+    <!-- Pétalos flotando -->
+    <div class="petals">
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+        <div class="petal"></div>
+    </div>
 </body>
 </html>
