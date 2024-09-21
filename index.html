@@ -58,10 +58,48 @@
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
         }
 
+        /* Carousel de fotos */
+        .carousel {
+            position: relative;
+            width: 80%;
+            margin: 0 auto;
+            margin-top: 20px;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel img {
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-buttons button {
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            padding: 10px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .carousel-buttons button:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
         /* Flores estáticas */
         .flower {
             position: absolute;
-            background: url('1.jpg') no-repeat center center;
+            background: url('https://m.media-amazon.com/images/I/61H3t2hKtjL.__AC_SX300_SY300_QL70_FMwebp_.jpg') no-repeat center center;
             background-size: cover;
             width: 150px;
             height: 150px;
@@ -82,7 +120,7 @@
         /* Flores flotantes */
         .floating-flower {
             position: absolute;
-            background: url('2.jpg') no-repeat center center;
+            background: url('https://m.media-amazon.com/images/I/61H3t2hKtjL.__AC_SX300_SY300_QL70_FMwebp_.jpg') no-repeat center center;
             background-size: contain;
             width: 60px;
             height: 60px;
@@ -140,7 +178,17 @@
 <body>
     <div class="container">
         <h1>Feliz Día de las Flores Amarillas</h1>
-        <p>Que la magia de este día te llene de felicidad y amor.</p>
+        <p>Que la magia de este día nos llene de amor y felicidad.</p>
+
+        <!-- Carousel de fotos -->
+        <div class="carousel">
+            <img id="carousel-img" src="1.jpg" alt="Foto 1">
+            <div class="carousel-buttons">
+                <button onclick="prevImage()">&#10094;</button>
+                <button onclick="nextImage()">&#10095;</button>
+            </div>
+        </div>
+
         <button class="button" onclick="alert('¡Gracias por compartir este día tan especial!')">Celebrar</button>
     </div>
 
@@ -165,5 +213,26 @@
         <div class="sparkle"></div>
         <div class="sparkle"></div>
     </div>
+
+    <script>
+        const images = [
+            '1.jpg',
+            '2.jpg',
+            '3.jpg'
+        ];
+
+        let currentImageIndex = 0;
+        const carouselImg = document.getElementById('carousel-img');
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            carouselImg.src = images[currentImageIndex];
+        }
+
+        function prevImage() {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            carouselImg.src = images[currentImageIndex];
+        }
+    </script>
 </body>
 </html>
