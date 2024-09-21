@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Día de las Flores Amarillas</title>
+    <title>Feliz Día de las Flores Amarillas</title>
     <style>
         * {
             margin: 0;
@@ -17,26 +17,28 @@
             justify-content: center;
             align-items: center;
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ffef99, #ffe666);
+            background: radial-gradient(circle, rgba(255,242,204,1) 0%, rgba(255,226,148,1) 100%);
             overflow: hidden;
+            position: relative;
         }
 
         .container {
             text-align: center;
-            color: white;
+            color: #4a4a4a;
+            z-index: 10;
         }
 
         h1 {
             font-size: 4rem;
             color: #FFD700;
-            text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            animation: zoomIn 2s ease-out forwards;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 2s ease-out forwards;
         }
 
         p {
             font-size: 1.8rem;
             margin-top: 20px;
-            color: #fff;
+            color: #4a4a4a;
             opacity: 0;
             animation: fadeIn 3s ease-out forwards;
             animation-delay: 2s;
@@ -66,35 +68,50 @@
             transform: translateY(2px);
         }
 
-        /* Flor giratoria */
+        /* Flores estáticas */
         .flower {
             position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70px;
-            height: 70px;
-            background: url('https://i.imgur.com/ygBFfhX.png') no-repeat center center;
-            background-size: contain;
-            animation: drop 5s ease-out infinite, rotateFlower 10s linear infinite;
-            opacity: 0;
-            animation-delay: 0.5s;
+            background: url('https://i.imgur.com/ChmKX9W.png') no-repeat center center;
+            background-size: cover;
+            width: 120px;
+            height: 120px;
         }
 
-        /* Varias flores cayendo */
-        .flower:nth-child(2) { animation-delay: 1s; left: 20%; }
-        .flower:nth-child(3) { animation-delay: 1.5s; left: 80%; }
-        .flower:nth-child(4) { animation-delay: 2s; left: 30%; }
-        .flower:nth-child(5) { animation-delay: 2.5s; left: 70%; }
-        .flower:nth-child(6) { animation-delay: 3s; left: 40%; }
+        .flower1 { top: 10%; left: 5%; animation: sway 5s ease-in-out infinite; }
+        .flower2 { top: 20%; right: 10%; animation: sway 7s ease-in-out infinite; }
+        .flower3 { bottom: 10%; left: 10%; animation: sway 6s ease-in-out infinite; }
+        .flower4 { bottom: 20%; right: 5%; animation: sway 8s ease-in-out infinite; }
 
-        /* Animaciones */
-        @keyframes zoomIn {
-            from { transform: scale(0.5); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+        @keyframes sway {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(5deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        /* Flores flotantes */
+        .floating-flower {
+            position: absolute;
+            background: url('https://i.imgur.com/ygBFfhX.png') no-repeat center center;
+            background-size: contain;
+            width: 70px;
+            height: 70px;
+            opacity: 0;
+            animation: floatFlower 8s ease-in-out infinite;
+        }
+
+        .floating-flower:nth-child(2) { animation-delay: 2s; left: 20%; }
+        .floating-flower:nth-child(3) { animation-delay: 4s; right: 30%; }
+        .floating-flower:nth-child(4) { animation-delay: 6s; left: 50%; }
+        .floating-flower:nth-child(5) { animation-delay: 8s; right: 10%; }
+
+        @keyframes floatFlower {
+            0% { top: 100%; opacity: 0; }
+            30% { opacity: 1; }
+            100% { top: -10%; opacity: 0; }
         }
 
         @keyframes fadeIn {
+            from { opacity: 0; }
             to { opacity: 1; }
         }
 
@@ -102,75 +119,25 @@
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        @keyframes drop {
-            0% { top: -100px; opacity: 0; }
-            20% { opacity: 1; }
-            100% { top: 110vh; opacity: 0; }
-        }
-
-        @keyframes rotateFlower {
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Efecto de partículas de pétalos */
-        .petals {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .petal {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background-color: rgba(255, 218, 68, 0.8);
-            border-radius: 50%;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .petal:nth-child(1) { left: 10%; animation-delay: 0s; }
-        .petal:nth-child(2) { left: 20%; animation-delay: 1s; }
-        .petal:nth-child(3) { left: 30%; animation-delay: 2s; }
-        .petal:nth-child(4) { left: 40%; animation-delay: 3s; }
-        .petal:nth-child(5) { left: 50%; animation-delay: 4s; }
-        .petal:nth-child(6) { left: 60%; animation-delay: 5s; }
-        .petal:nth-child(7) { left: 70%; animation-delay: 6s; }
-        .petal:nth-child(8) { left: 80%; animation-delay: 7s; }
-
-        @keyframes float {
-            0% { top: -20px; opacity: 0; }
-            10% { opacity: 1; }
-            100% { top: 100vh; opacity: 0; }
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>¡Feliz Día de las Flores Amarillas!</h1>
-        <p>Que tu día esté lleno de luz, amor y flores.</p>
-        <button class="button" onclick="alert('¡Disfruta de este día tan especial!')">Celebrar</button>
+        <h1>Feliz Día de las Flores Amarillas</h1>
+        <p>Espero que tu día sea tan brillante y especial como estas flores.</p>
+        <button class="button" onclick="alert('¡Que tengas un día increíble lleno de amor y flores!')">Celebrar</button>
     </div>
 
-    <!-- Flores animadas cayendo -->
-    <div class="flower"></div>
-    <div class="flower"></div>
-    <div class="flower"></div>
-    <div class="flower"></div>
-    <div class="flower"></div>
+    <!-- Flores decorativas estáticas -->
+    <div class="flower flower1"></div>
+    <div class="flower flower2"></div>
+    <div class="flower flower3"></div>
+    <div class="flower flower4"></div>
 
-    <!-- Pétalos flotando -->
-    <div class="petals">
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-    </div>
+    <!-- Flores flotantes -->
+    <div class="floating-flower"></div>
+    <div class="floating-flower"></div>
+    <div class="floating-flower"></div>
+    <div class="floating-flower"></div>
 </body>
 </html>
