@@ -17,55 +17,45 @@
             justify-content: center;
             align-items: center;
             font-family: 'Arial', sans-serif;
-            background: radial-gradient(circle, rgba(255,242,204,1) 0%, rgba(255,226,148,1) 100%);
+            background: linear-gradient(135deg, #fff8cc, #fede84);
             overflow: hidden;
             position: relative;
         }
 
         .container {
             text-align: center;
-            color: #4a4a4a;
+            color: #333;
             z-index: 10;
+            animation: fadeIn 2s ease-in-out;
         }
 
         h1 {
             font-size: 4rem;
-            color: #FFD700;
-            text-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 2s ease-out forwards;
+            color: #FFA500;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
         }
 
         p {
             font-size: 1.8rem;
-            margin-top: 20px;
-            color: #4a4a4a;
-            opacity: 0;
-            animation: fadeIn 3s ease-out forwards;
-            animation-delay: 2s;
+            color: #555;
+            margin-bottom: 30px;
         }
 
         .button {
-            margin-top: 30px;
-            padding: 15px 30px;
-            background-color: #FFD700;
+            padding: 15px 40px;
+            background-color: #FFA500;
             border: none;
-            border-radius: 25px;
+            border-radius: 30px;
             font-size: 1.2rem;
             color: white;
             cursor: pointer;
-            transition: all 0.3s ease;
-            opacity: 0;
-            animation: fadeInUp 3s ease-out forwards;
-            animation-delay: 3s;
+            transition: all 0.4s ease;
         }
 
         .button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .button:active {
-            transform: translateY(2px);
+            transform: scale(1.1);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
         }
 
         /* Flores estáticas */
@@ -73,19 +63,20 @@
             position: absolute;
             background: url('https://i.imgur.com/ChmKX9W.png') no-repeat center center;
             background-size: cover;
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            height: 150px;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
         }
 
-        .flower1 { top: 10%; left: 5%; animation: sway 5s ease-in-out infinite; }
-        .flower2 { top: 20%; right: 10%; animation: sway 7s ease-in-out infinite; }
-        .flower3 { bottom: 10%; left: 10%; animation: sway 6s ease-in-out infinite; }
-        .flower4 { bottom: 20%; right: 5%; animation: sway 8s ease-in-out infinite; }
+        .flower1 { top: 10%; left: 10%; animation: sway 7s ease-in-out infinite; }
+        .flower2 { top: 20%; right: 5%; animation: sway 9s ease-in-out infinite; }
+        .flower3 { bottom: 10%; left: 15%; animation: sway 8s ease-in-out infinite; }
+        .flower4 { bottom: 15%; right: 10%; animation: sway 6s ease-in-out infinite; }
 
+        /* Animación de balanceo */
         @keyframes sway {
-            0% { transform: rotate(0deg); }
-            50% { transform: rotate(5deg); }
-            100% { transform: rotate(0deg); }
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(10deg); }
         }
 
         /* Flores flotantes */
@@ -93,42 +84,67 @@
             position: absolute;
             background: url('https://i.imgur.com/ygBFfhX.png') no-repeat center center;
             background-size: contain;
-            width: 70px;
-            height: 70px;
-            opacity: 0;
-            animation: floatFlower 8s ease-in-out infinite;
+            width: 60px;
+            height: 60px;
+            animation: floatFlower 12s ease-in-out infinite;
+            opacity: 0.7;
         }
 
-        .floating-flower:nth-child(2) { animation-delay: 2s; left: 20%; }
-        .floating-flower:nth-child(3) { animation-delay: 4s; right: 30%; }
-        .floating-flower:nth-child(4) { animation-delay: 6s; left: 50%; }
-        .floating-flower:nth-child(5) { animation-delay: 8s; right: 10%; }
+        .floating-flower:nth-child(2) { animation-delay: 3s; left: 15%; }
+        .floating-flower:nth-child(3) { animation-delay: 6s; right: 20%; }
+        .floating-flower:nth-child(4) { animation-delay: 9s; left: 60%; }
+        .floating-flower:nth-child(5) { animation-delay: 12s; right: 40%; }
 
         @keyframes floatFlower {
-            0% { top: 100%; opacity: 0; }
-            30% { opacity: 1; }
-            100% { top: -10%; opacity: 0; }
+            0% { top: 120%; opacity: 0; transform: scale(0.5); }
+            30% { opacity: 1; transform: scale(1); }
+            100% { top: -20%; opacity: 0; transform: scale(1.2); }
         }
+
+        /* Partículas brillantes */
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .sparkle {
+            position: absolute;
+            background-color: rgba(255, 223, 0, 0.7);
+            border-radius: 50%;
+            width: 5px;
+            height: 5px;
+            animation: sparkle 5s linear infinite;
+        }
+
+        @keyframes sparkle {
+            0% { transform: translate(0, 0) scale(0); opacity: 1; }
+            100% { transform: translate(200px, 100px) scale(1.5); opacity: 0; }
+        }
+
+        .sparkle:nth-child(2) { animation-delay: 0.5s; left: 20%; top: 30%; }
+        .sparkle:nth-child(3) { animation-delay: 1s; left: 70%; top: 60%; }
+        .sparkle:nth-child(4) { animation-delay: 1.5s; left: 40%; top: 80%; }
+        .sparkle:nth-child(5) { animation-delay: 2s; left: 80%; top: 20%; }
+        .sparkle:nth-child(6) { animation-delay: 2.5s; left: 10%; top: 50%; }
 
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Feliz Día de las Flores Amarillas</h1>
-        <p>Espero que tu día sea tan brillante y especial como estas flores.</p>
-        <button class="button" onclick="alert('¡Que tengas un día increíble lleno de amor y flores!')">Celebrar</button>
+        <p>Que la magia de este día te llene de felicidad y amor.</p>
+        <button class="button" onclick="alert('¡Gracias por compartir este día tan especial!')">Celebrar</button>
     </div>
 
-    <!-- Flores decorativas estáticas -->
+    <!-- Flores estáticas -->
     <div class="flower flower1"></div>
     <div class="flower flower2"></div>
     <div class="flower flower3"></div>
@@ -139,6 +155,15 @@
     <div class="floating-flower"></div>
     <div class="floating-flower"></div>
     <div class="floating-flower"></div>
+
+    <!-- Efecto de partículas brillantes -->
+    <div class="sparkles">
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+    </div>
 </body>
 </html>
-
