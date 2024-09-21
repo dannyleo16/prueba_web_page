@@ -3,236 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Día de las Flores Amarillas</title>
+    <title>Flores Amarillas para Ti</title>
     <style>
-        * {
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff5b8;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #fff8cc, #fede84);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .container {
-            text-align: center;
-            color: #333;
-            z-index: 10;
-            animation: fadeIn 2s ease-in-out;
+            height: 100vh;
         }
 
         h1 {
-            font-size: 4rem;
-            color: #FFA500;
-            text-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+            color: #e1b12c;
+            text-align: center;
+            font-size: 3rem;
             margin-bottom: 20px;
         }
 
         p {
-            font-size: 1.8rem;
-            color: #555;
-            margin-bottom: 30px;
+            font-size: 1.5rem;
+            color: #333;
+            text-align: center;
+            margin-bottom: 40px;
         }
 
-        .button {
-            padding: 15px 40px;
-            background-color: #FFA500;
+        button {
+            background-color: #e1b12c;
+            color: white;
+            padding: 15px 30px;
             border: none;
-            border-radius: 30px;
+            border-radius: 5px;
             font-size: 1.2rem;
-            color: white;
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: background-color 0.3s ease;
         }
 
-        .button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+        button:hover {
+            background-color: #d4a70b;
         }
 
-        /* Carousel de fotos */
-        .carousel {
-            position: relative;
-            width: 80%;
-            margin: 0 auto;
-            margin-top: 20px;
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        .gallery {
+            display: none;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .carousel img {
-            width: 100%;
-            border-radius: 15px;
+        .gallery img {
+            max-width: 90%;
+            margin: 10px 0;
+            border: 5px solid #e1b12c;
+            border-radius: 10px;
         }
 
-        .carousel-buttons {
-            position: absolute;
-            top: 50%;
-            width: 100%;
+        .show-gallery {
             display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-        }
-
-        .carousel-buttons button {
-            background: rgba(0, 0, 0, 0.5);
-            border: none;
-            padding: 10px;
-            color: white;
-            font-size: 18px;
-            cursor: pointer;
-        }
-
-        .carousel-buttons button:hover {
-            background: rgba(0, 0, 0, 0.8);
-        }
-
-        /* Flores estáticas */
-        .flower {
-            position: absolute;
-            background: url('https://m.media-amazon.com/images/I/61H3t2hKtjL.__AC_SX300_SY300_QL70_FMwebp_.jpg') no-repeat center center;
-            background-size: cover;
-            width: 150px;
-            height: 150px;
-            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
-        }
-
-        .flower1 { top: 10%; left: 10%; animation: sway 7s ease-in-out infinite; }
-        .flower2 { top: 20%; right: 5%; animation: sway 9s ease-in-out infinite; }
-        .flower3 { bottom: 10%; left: 15%; animation: sway 8s ease-in-out infinite; }
-        .flower4 { bottom: 15%; right: 10%; animation: sway 6s ease-in-out infinite; }
-
-        /* Animación de balanceo */
-        @keyframes sway {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(10deg); }
-        }
-
-        /* Flores flotantes */
-        .floating-flower {
-            position: absolute;
-            background: url('https://m.media-amazon.com/images/I/61H3t2hKtjL.__AC_SX300_SY300_QL70_FMwebp_.jpg') no-repeat center center;
-            background-size: contain;
-            width: 60px;
-            height: 60px;
-            animation: floatFlower 12s ease-in-out infinite;
-            opacity: 0.7;
-        }
-
-        .floating-flower:nth-child(2) { animation-delay: 3s; left: 15%; }
-        .floating-flower:nth-child(3) { animation-delay: 6s; right: 20%; }
-        .floating-flower:nth-child(4) { animation-delay: 9s; left: 60%; }
-        .floating-flower:nth-child(5) { animation-delay: 12s; right: 40%; }
-
-        @keyframes floatFlower {
-            0% { top: 120%; opacity: 0; transform: scale(0.5); }
-            30% { opacity: 1; transform: scale(1); }
-            100% { top: -20%; opacity: 0; transform: scale(1.2); }
-        }
-
-        /* Partículas brillantes */
-        .sparkles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        .sparkle {
-            position: absolute;
-            background-color: rgba(255, 223, 0, 0.7);
-            border-radius: 50%;
-            width: 5px;
-            height: 5px;
-            animation: sparkle 5s linear infinite;
-        }
-
-        @keyframes sparkle {
-            0% { transform: translate(0, 0) scale(0); opacity: 1; }
-            100% { transform: translate(200px, 100px) scale(1.5); opacity: 0; }
-        }
-
-        .sparkle:nth-child(2) { animation-delay: 0.5s; left: 20%; top: 30%; }
-        .sparkle:nth-child(3) { animation-delay: 1s; left: 70%; top: 60%; }
-        .sparkle:nth-child(4) { animation-delay: 1.5s; left: 40%; top: 80%; }
-        .sparkle:nth-child(5) { animation-delay: 2s; left: 80%; top: 20%; }
-        .sparkle:nth-child(6) { animation-delay: 2.5s; left: 10%; top: 50%; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Feliz Día de las Flores Amarillas</h1>
-        <p>Que la magia de este día nos llene de amor y felicidad.</p>
+    <h1>Flores Amarillas para Mi Amor</h1>
+    <p>Hoy, en este día especial, quiero que sepas cuánto te amo. Estas flores amarillas son solo un símbolo de todo lo que siento por ti.</p>
+    <button id="showImages">Ver las flores</button>
 
-        <!-- Carousel de fotos -->
-        <div class="carousel">
-            <img id="carousel-img" src="1.jpg" alt="Foto 1">
-            <div class="carousel-buttons">
-                <button onclick="prevImage()">&#10094;</button>
-                <button onclick="nextImage()">&#10095;</button>
-            </div>
-        </div>
-
-        <button class="button" onclick="alert('¡Gracias por compartir este día tan especial!')">Celebrar</button>
-    </div>
-
-    <!-- Flores estáticas -->
-    <div class="flower flower1"></div>
-    <div class="flower flower2"></div>
-    <div class="flower flower3"></div>
-    <div class="flower flower4"></div>
-
-    <!-- Flores flotantes -->
-    <div class="floating-flower"></div>
-    <div class="floating-flower"></div>
-    <div class="floating-flower"></div>
-    <div class="floating-flower"></div>
-
-    <!-- Efecto de partículas brillantes -->
-    <div class="sparkles">
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
-        <div class="sparkle"></div>
+    <div class="gallery" id="gallery">
+        <img src="1.jpg" alt="Imagen 1">
+        <img src="2.jpg" alt="Imagen 2">
+        <img src="3.jpg" alt="Imagen 3">
     </div>
 
     <script>
-        const images = [
-            '1.jpg',
-            '2.jpg',
-            '3.jpg'
-        ];
+        const button = document.getElementById('showImages');
+        const gallery = document.getElementById('gallery');
 
-        let currentImageIndex = 0;
-        const carouselImg = document.getElementById('carousel-img');
-
-        function nextImage() {
-            currentImageIndex = (currentImageIndex + 1) % images.length;
-            carouselImg.src = images[currentImageIndex];
-        }
-
-        function prevImage() {
-            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-            carouselImg.src = images[currentImageIndex];
-        }
+        button.addEventListener('click', () => {
+            gallery.classList.toggle('show-gallery');
+        });
     </script>
 </body>
 </html>
